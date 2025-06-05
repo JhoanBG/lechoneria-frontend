@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector de Mesas 3D - Reservas</title>
+    <meta name="description" content="Visualizador 3D para selección de mesas en restaurante">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js" as="script">
+    
+    <style>
+        /* Reset y variables CSS */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+            --glass-bg: rgba(255,255,255,0.95);
+            --glass-border: rgba(255,255,255,0.2);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            height: 100vh;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        #three-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+        }
+
+        #three-container:active {
+            cursor: grabbing;
+        }
+
+        canvas { 
+            display: block;
+            outline: none;
+        }
+
+        /* Paneles base */
+        .panel {
+            position: absolute;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Panel de información */
+        .ui-panel {
+            top: 20px;
+            left: 20px;
+            width: 300px;
+            max-width: calc(100vw - 40px);
+        }
+
+        .ui-panel h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ui-panel h2::before {
+            content: '🪑';
+            font-size: 1.5em;
+        }
+
+        #mesa-info {
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        /* Panel de controles */
+        .controls-panel {
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Instrucciones */
+        .instructions {
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .instructions .instruction-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            gap: 10px;
+        }
+
+        .instructions .instruction-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .instruction-icon {
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Botón siguiente */
+        .next-button {
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--success-color), #45a049);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .next-button.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .next-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Loading overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: white;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Toast messages */
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            z-index: 1001;
+            transform: translateX(400px);
+            transition: var(--transition);
+            max-width: 350px;
+        }
+
+        .toast-message.show {
+            transform: translateX(0);
+        }
+
+        .toast-success { background: var(--success-color); }
+        .toast-warning { background: var(--warning-color); }
+        .toast-error { background: var(--error-color); }
+        .toast-info { background: var(--primary-color); }
+
+        /* Error message */
+        .error-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            z-index: 1002;
+            max-width: 400px;
+        }
+
+        .error-message h3 {
+            color: var(--error-color);
+            margin-bottom: 15px;
+        }
+
+        .error-message button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: var(--transition);
+        }
+
+        .error-message button:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Animaciones */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .ui-panel, .controls-panel {
+                position: relative;
+                width: auto;
+                margin: 10px;
+            }
+            
+            .instructions {
+                position: relative;
+                margin: 10px;
+                max-width: none;
+            }
+            
+            .next-button {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                width: auto;
+            }
+            
+            .panel {
+                backdrop-filter: blur(15px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .panel {
+                padding: 15px;
+            }
+            
+            .ui-panel {
+                width: calc(100vw - 20px);
+                left: 10px;
+                top: 10px;
+            }
+            
+            .controls-panel {
+                right: 10px;
+                top: 10px;
+            }
+            
+            .instructions {
+                left: 10px;
+                bottom: 10px;
+                font-size: 12px;
+            }
+        }
+
+        /* Estados de accesibilidad */
+        .control-btn:focus,
+        .next-button:focus {
+            outline: 3px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Modo de alto contraste */
+        @media (prefers-contrast: high) {
+            .panel {
+                background: rgba(255, 255, 255, 1);
+                border: 2px solid #000;
+            }
+            
+            .instructions {
+                background: rgba(0, 0, 0, 0.9);
+                border: 1px solid #fff;
+            }
+        }
+
+        /* Modo de movimiento reducido */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="three-container" role="application" aria-label="Visualizador 3D de mesas"></div>
+
+    <div class="ui-panel panel">
+        <h2>Selector de Mesas</h2>
+        <div id="mesa-info" role="status" aria-live="polite">
+            Haz clic en una mesa para seleccionarla.
+        </div>
+    </div>
+
+    <div class="controls-panel panel">
+        <button class="control-btn" onclick="resetCamera()" aria-label="Restablecer vista de cámara">
+            <span class="instruction-icon">🏠</span>
+            Vista Inicial
+        </button>
+        <button class="control-btn" onclick="location.reload()" aria-label="Recargar página">
+            <span class="instruction-icon">🔄</span>
+            Recargar
+        </button>
+    </div>
+
+    <div class="instructions panel">
+        <div class="instruction-item">
+            <span class="instruction-icon">🖱️</span>
+            <span>Clic: Seleccionar mesa</span>
+        </div>
+        <div class="instruction-item">
+            <span class="instruction-icon">🔄</span>
+            <span>Arrastrar: Rotar vista</span>
+        </div>
+        <div class="instruction-item">
+            <span class="instruction-icon">🔍</span>
+            <span>Scroll: Zoom</span>
+        </div>
+        <div class="instruction-item">
+            <span class="instruction-icon">⌨️</span>
+            <span>R: Resetear / Esc: Limpiar</span>
+        </div>
+    </div>
+
+    <button id="nextButton" class="next-button panel" onclick="redirectToReserved()" aria-label="Continuar con la reserva">
+        <span>Continuar con Reserva</span>
+        <span>➡️</span>
+    </button>
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r132/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Script principal -->
+    <script src="/js/viewer.js"></script>
+    
+    <!-- Service Worker para mejor rendimiento -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(() => console.log('✅ Service Worker registrado'))
+                    .catch(() => console.log('⚠️ Service Worker no disponible'));
+            });
+        }
+    </script>
+</body>
+</html>
+

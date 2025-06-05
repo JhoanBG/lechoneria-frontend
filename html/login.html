@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión | LECHONA DE LA ABUELA</title>
+  <link rel="stylesheet" href="../estilos/login.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo-section">
+      <img src="../assestment/logo.png" alt="Logo Maisdaju" class="logo">
+      <h1 class="login-title">Bienvenido</h1>
+      <p class="login-subtitle">Inicia sesión en tu cuenta</p>
+    </div>
+
+    <div id="alert-container" class="alert">
+      <i class="fas fa-exclamation-circle"></i>
+      <span id="alert-message"></span>
+    </div>
+
+    <form id="login-form" class="form-container">
+      <div class="form-group">
+        <label class="form-label" for="email">Correo electrónico</label>
+        <div class="input-container">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            placeholder="tu@email.com"
+            required
+            autocomplete="email"
+          >
+          <i class="input-icon fas fa-envelope"></i>
+          <div class="error-message" id="email-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span></span>
+          </div>
+          <div class="success-message" id="email-success">
+            <i class="fas fa-check-circle"></i>
+            <span>Email válido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Contraseña</label>
+        <div class="input-container">
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-input"
+            placeholder="Tu contraseña"
+            required
+            autocomplete="current-password"
+          >
+          <i class="input-icon fas fa-lock"></i>
+          <button type="button" class="password-toggle" id="password-toggle">
+            <i class="fas fa-eye"></i>
+          </button>
+          <div class="error-message" id="password-error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span></span>
+          </div>
+        </div>
+        <div class="forgot-password">
+          <a href="#" onclick="mostrarRecuperarPassword()">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+
+      <button type="submit" class="login-button" id="login-button">
+        <span class="button-text">
+          <i class="fas fa-sign-in-alt"></i>
+          Iniciar Sesión
+        </span>
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>¿No tienes cuenta?</span>
+    </div>
+
+    <div class="register-link">
+      <a href="../html/registro.html">
+        <i class="fas fa-user-plus"></i>
+        Crear cuenta nueva
+      </a>
+    </div>
+
+    <div class="security-info">
+      <h4><i class="fas fa-shield-alt"></i> Tu seguridad es importante</h4>
+      <ul>
+        <li><i class="fas fa-check"></i> Conexión segura SSL</li>
+        <li><i class="fas fa-check"></i> Datos encriptados</li>
+        <li><i class="fas fa-check"></i> Autenticación verificada</li>
+      </ul>
+    </div>
+  </div>
+  <script src="../lenguaje/login.js"></script>
+</body>
+</html>

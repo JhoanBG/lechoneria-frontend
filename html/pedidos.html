@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedidos</title>
+  <link rel="stylesheet" href="../estilos/pedidos.css">
+</head>
+<body>
+  <body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">L</div>
+                <div class="header-text">
+                    <h1>Lechonería de la Abuela</h1>
+                    <h2>Gestión de Pedidos</h2>
+                </div>
+            </div>
+            <button class="close-button" onclick="window.location.href='#'">✕ Cerrar</button>
+        </header>
+
+
+    <div class="dashboard">
+      <!-- Panel de Control -->
+      <div class="panel">
+          <h3>🎛️ Control de Pedidos</h3>
+          
+          <div class="stats">
+              <div class="stat-card">
+                  <span class="stat-number" id="total-items">0</span>
+                  <span class="stat-label">Productos</span>
+              </div>
+              <div class="stat-card">
+                  <span class="stat-number" id="order-status">Inactivo</span>
+                  <span class="stat-label">Estado</span>
+              </div>
+          </div>
+
+          <div class="control-buttons">
+              <button class="btn btn-primary" id="load-orders">
+                  📥 Cargar Pedidos
+              </button>
+              <button class="btn btn-success" id="start-preparation" disabled>
+                  🍳 Iniciar Preparación
+              </button>
+          </div>
+
+          <div class="control-buttons">
+              <button class="btn btn-warning" id="pause-preparation" disabled>
+                  ⏸️ Pausar
+              </button>
+              <button class="btn btn-danger" id="clear-orders">
+                  🗑️ Limpiar Todo
+              </button>
+          </div>
+      </div>
+
+      <!-- Panel de Estado -->
+      <div class="panel">
+          <h3>⏱️ Estado de Preparación</h3>
+          
+          <div class="status-tracker">
+              <div class="status-steps">
+                  <div class="status-progress" id="status-progress"></div>
+                  <div class="status-step" id="step-iniciado">🔴</div>
+                  <div class="status-step" id="step-proceso">🟡</div>
+                  <div class="status-step" id="step-finalizado">🟢</div>
+              </div>
+              <div class="status-labels">
+                  <div class="status-label">Iniciado</div>
+                  <div class="status-label">En Proceso</div>
+                  <div class="status-label">Finalizado</div>
+              </div>
+          </div>
+
+          <div class="status-message" id="status-message">
+              ¡Pedido completado! Listo para servir.
+          </div>
+      </div>
+  </div>
+
+  <!-- Tabla de Pedidos -->
+  <div class="panel">
+      <h3>📋 Lista de Pedidos</h3>
+      
+      <div id="loading" class="loading">
+          🔄 Cargando pedidos...
+      </div>
+
+      <table class="orders-table" id="orders-table">
+          <thead>
+              <tr>
+                  <th>Producto</th>
+                  <th>Opción</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr class="empty-state">
+                  <td colspan="4">No hay pedidos cargados. Haz clic en "Cargar Pedidos" para comenzar.</td>
+              </tr>
+          </tbody>
+      </table>
+
+      <div class="total-section" id="total-section" style="display: none;">
+          <div class="total-label">Total del Pedido:</div>
+          <div class="total-amount" id="total-amount">$0.00</div>
+      </div>
+  </div>
+</div>
+  
+  <script src="../lenguaje/pedidos.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lechoneria de la Abuela</title>
+    <link rel="stylesheet" href="/glb-viewer-project/public/estilos/style.css">
+</head>
+<body>
+    <div class="spice-icon spice-1">🌶️</div>
+    <div class="spice-icon spice-2">🧄</div>
+    <div class="spice-icon spice-3">🧅</div>
+    
+    <div class="main-container loading">
+      <div class="logo-container">
+        <div class="logo">
+          <span class="logo-text">🐷</span>
+        </div>
+        <div class="brand-subtitle">Lechonería de la Abuela</div>
+        <div class="established">Desde 1950</div>
+      </div>
+  
+      <h1>¡Bienvenidos a Casa!</h1>
+      <p class="subtitle">Sabores auténticos y tradición familiar. El mejor lechón de la región, preparado con recetas ancestrales.</p>
+  
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🔥</div>
+          <div class="feature-text">Receta Original</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">👵</div>
+          <div class="feature-text">Tradición</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⭐</div>
+          <div class="feature-text">Calidad Premium</div>
+        </div>
+      </div>
+  
+      <div class="button-group">
+        <a href="../html/login.html" class="btn btn-primary">Iniciar Sesión</a>
+        <a href="../html/registro.html" class="btn btn-secondary">REGISTRATE</a>
+      </div>
+      
+      <a href="../html/nosotros.html" class="btn btn-outline" style="margin-top: 1.5rem;">Nuestra Historia</a>
+  
+      <div class="footer-info">
+        <p>🏆 Más de 70 años deleitando paladares con auténtico sabor casero</p>
+      </div>
+    </div>
+  
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+      <div class="chat-button" onclick="toggleChat()">
+        <span class="chat-icon">💬</span>
+        <span class="chat-text">¡Habla con nosotros!</span>
+      </div>
+    </div>
+  
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-header">
+        <div class="chat-header-info">
+          <div class="chat-avatar">👵</div>
+          <div class="chat-title">
+            <h4>Abuela Carmen</h4>
+            <span>Siempre lista para atenderte</span>
+          </div>
+        </div>
+        <button class="chat-close" onclick="toggleChat()">✕</button>
+      </div>
+      
+      <div class="chat-box" id="chatBox">
+        <div class="chat-message bot-message">
+          <div class="message-avatar">👵</div>
+          <div class="message-content">
+            ¡Hola, querido! Bienvenido a la Lechonería de la Abuela. ¿En qué puedo ayudarte hoy?
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="chat-input-container">
+        <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+        <button onclick="sendMessage()" class="send-button">
+          <span>➤</span>
+        </button>
+      </div>
+    </div>
+    <script src="/glb-viewer-project/public/lenguaje/script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de Domicilio - Lechonería de la Abuela</title>
+    <link rel="stylesheet" href="../estilos/gestion.css">
+</head>
+  
+  <body>
+    <div class="container">
+        <div class="header">
+            <h1>🏍️ Seguimiento de Domicilio</h1>
+            <p>Lechonería de la Abuela - Tu pedido está en camino</p>
+        </div>
+
+        <div class="tracking-container">
+            <div class="order-info">
+                <h2>📋 Información del Pedido</h2>
+                <div class="order-summary">
+                    <p><strong>Número de Pedido:</strong> <span id="order-number"></span></p>
+                    <p><strong>Cliente:</strong> <span id="customer-name"></span></p>
+                    <p><strong>Teléfono:</strong> <span id="customer-phone"></span></p>
+                    <p><strong>Dirección:</strong> <span id="customer-address"></span></p>
+                    
+                    <div style="margin-top: 15px;">
+                        <h4>Productos:</h4>
+                        <div id="order-items">
+                            <div class="order-item">
+                                <span>Lechona Cojín 15 platos</span>
+                                <span>$170,000</span>
+                            </div>
+                            <div class="order-item">
+                                <span>Chorizo con Papa Criolla</span>
+                                <span>$25,000</span>
+                            </div>
+                        </div>
+                        <div class="order-item" style="border-top: 2px solid #4299e1; font-weight: bold;">
+                            <span>Total:</span>
+                            <span id="order-total">$198,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="delivery-status">
+                <h2>🚚 Estado del Domicilio</h2>
+                <div class="status-timeline">
+                    <div class="status-step completed">
+                        <div class="status-icon">✅</div>
+                        <div>
+                            <strong>Pedido Confirmado</strong>
+                            <p>Tu pedido ha sido recibido y confirmado</p>
+                        </div>
+                    </div>
+                    <div class="status-step completed">
+                        <div class="status-icon">👨‍🍳</div>
+                        <div>
+                            <strong>Preparando</strong>
+                            <p>Nuestros chefs están preparando tu pedido</p>
+                        </div>
+                    </div>
+                    <div class="status-step current">
+                        <div class="status-icon">🏍️</div>
+                        <div>
+                            <strong>En Camino</strong>
+                            <p>Tu domiciliario está en ruta hacia tu dirección</p>
+                        </div>
+                    </div>
+                    <div class="status-step pending">
+                        <div class="status-icon">🏠</div>
+                        <div>
+                            <strong>Entregado</strong>
+                            <p>Tu pedido será entregado pronto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="map-container">
+            <h2 style="margin-bottom: 20px; color: #4a5568;">🗺️ Ubicación en Tiempo Real</h2>
+            <div class="map-simulation">
+                <div class="route-line" style="top: 35px; left: 50px; width: calc(100% - 100px);"></div>
+                
+                <div class="location-marker restaurant-marker" title="Lechonería de la Abuela">
+                    🏪
+                </div>
+                
+                <div class="location-marker customer-marker" title="Tu Ubicación">
+                    🏠
+                </div>
+                
+                <div class="delivery-bike" title="Domiciliario">
+                    🏍️
+                </div>
+            </div>
+
+            <div class="delivery-info">
+                <div class="info-card">
+                    <h4>Tiempo Estimado</h4>
+                    <p class="estimated-time" id="eta">12 min</p>
+                </div>
+                <div class="info-card">
+                    <h4>Distancia Restante</h4>
+                    <p id="distance">2.3 km</p>
+                </div>
+                <div class="info-card">
+                    <h4>Domiciliario</h4>
+                    <p id="delivery-person">Carlos Rodríguez</p>
+                </div>
+                <div class="info-card">
+                    <h4>Placa Moto</h4>
+                    <p id="bike-plate">ABC-123</p>
+                </div>
+            </div>
+
+            <button class="contact-delivery" onclick="contactDelivery()">
+                📞 Contactar Domiciliario
+            </button>
+        </div>
+    </div>
+  <!-- Cargar el archivo JavaScript separado -->
+  <script src="../public/html/gestion.js"></script>
+</body>
+</html>
+
+
+

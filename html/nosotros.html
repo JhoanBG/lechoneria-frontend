@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - ComicHamburgueseria</title>
+    <link rel="stylesheet" href="../estilos/nosotros.css">
+</head>
+<body>
+    <header>
+        <!-- Contenedor del logo -->
+        <div class="logo-container">
+            <img src="../assestment/logo.jfif" alt="Logo de Lechoneria" class="logo">
+        </div>
+        <!-- Título principal -->
+        <h1>Lechoneria de la Abuela</h1>
+
+        <!-- Menú desplegable -->
+        <div class="menu-container">
+            <button onclick="toggleMenu()">LechMenú</button>
+            <div id="menu" class="header-buttons" style="display: none;">
+                <button onclick="redirectToPage('../html/index.html')">Inicio</button>
+                <button onclick="redirectToPage('../infraest/quintomenu.html')">Menú</button>
+                <button onclick="redirectToPage('//localhost:3000/')">Reservas</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección de la historia del restaurante -->
+        <section id="historia">
+            <h2>Nuestra Historia</h2>
+            <p>
+                En el corazón del bullicioso barrio, entre calles empedradas y aromas tentadores, se encuentra un rincón que guarda uno de los secretos mejor guardados de la cocina tradicional: el restaurante La Lechonería de la Abuela. Con sus paredes decoradas con comida que cuentan historias y el inconfundible aroma que flota en el aire, este pequeño local es mucho más que un lugar para satisfacer el apetito; es un viaje al pasado, un tributo a la tradición, y un festín para los sentidos.
+            </p>
+            <p>
+                Desde hace décadas, la abuela María ha sido la guardiana de estas recetas ancestrales. Su lechona, dorada y crujiente por fuera, jugosa y llena de sabor por dentro, ha conquistado paladares y corazones, convirtiéndose en el plato más emblemático de la región.
+            </p>
+        </section>
+
+        <!-- Sección sobre el ambiente del restaurante -->
+        <section id="espacio">
+            <h2>Nuestro Espacio</h2>
+            <p>
+                El restaurante es mucho más que un lugar donde saciar el hambre. Es un punto de encuentro para amigos y familiares, un refugio donde las risas resuenan tan fuerte como el crujir de la piel de cerdo. Cada bocado es un homenaje a la tradición y al amor por la buena comida.
+            </p>
+        </section>
+
+        <!-- Sección de invitación a visitar el restaurante -->
+        <section id="visitanos">
+            <h2>¡Ven a visitarnos!</h2>
+            <p>
+                Si estás buscando una experiencia gastronómica que trascienda lo ordinario y te transporte a un mundo de sabores auténticos y recuerdos entrañables, no busques más: el restaurante de la abuela te espera con los brazos abiertos y el horno encendido.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Lechoneria de la Abuela - Teléfono: 3213715675 - Dirección: Calle Falsa 123, Bogotá, Colombia</p>
+    </footer>
+
+    <!-- Archivo de JavaScript -->
+    <script src="../lenguaje/script.js"></script>
+
+    <!-- JavaScript para manejar el menú -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+
+        function redirectToPage(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
+
+

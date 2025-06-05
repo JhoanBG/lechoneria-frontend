@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factura</title>
+  <link rel="stylesheet" href="../estilos/factura.css">
+</head>
+<body>  
+  <body>
+    <div class="container">
+        <div class="invoice-header">
+            <h1>🐷 Factura Electrónica</h1>
+            <p>Lechonería de la Abuela - Sabor Tradicional</p>
+        </div>
+
+        <div class="invoice-content">
+            <div class="invoice-info">
+                <div class="company-info">
+                    <h3>🏪 Información de la Empresa</h3>
+                    <p><strong>Lechonería de la Abuela</strong></p>
+                    <p>📍 Carrera 15 #32-45, Bogotá D.C.</p>
+                    <p>📞 (601) 234-5678</p>
+                    <p>📧 pedidos@lechoneriadelaabuela.com</p>
+                    <p>🆔 NIT: 900.123.456-7</p>
+                </div>
+
+                <div class="customer-info">
+                    <h3>👤 Información del Cliente</h3>
+                    <p><strong id="customer-name">Juan Pérez</strong></p>
+                    <p>📍 <span id="customer-address">Calle 123 #45-67, Bogotá</span></p>
+                    <p>📞 <span id="customer-phone">300-123-4567</span></p>
+                    <p>📧 <span id="customer-email">cliente@email.com</span></p>
+                </div>
+            </div>
+
+            <div class="invoice-details">
+                <div class="detail-item">
+                    <strong>📋 Número de Factura</strong>
+                    <span id="invoice-number">#FAC-123456</span>
+                </div>
+                <div class="detail-item">
+                    <strong>📅 Fecha de Emisión</strong>
+                    <span id="invoice-date"></span>
+                </div>
+                <div class="detail-item">
+                    <strong>⏰ Hora de Pedido</strong>
+                    <span id="order-time"></span>
+                </div>
+                <div class="detail-item">
+                    <strong>🚚 Método de Entrega</strong>
+                    <span>Domicilio</span>
+                </div>
+            </div>
+
+            <table class="items-table">
+                <thead>
+                    <tr>
+                        <th>📦 Producto</th>
+                        <th>🔧 Opción</th>
+                        <th>🔢 Cantidad</th>
+                        <th>💰 Precio Unitario</th>
+                        <th>💵 Total</th>
+                    </tr>
+                </thead>
+                <tbody id="items-tbody">
+                    <!-- Los items se cargarán aquí -->
+                </tbody>
+            </table>
+
+            <div class="total-section">
+                <div class="total-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="total-row">
+                    <span>Domicilio:</span>
+                    <span id="delivery-fee">$5,000</span>
+                </div>
+                <div class="total-row">
+                    <span>IVA (0%):</span>
+                    <span>$0</span>
+                </div>
+                <div class="total-row total-final">
+                    <span>TOTAL A PAGAR:</span>
+                    <span id="total-amount">$0</span>
+                </div>
+            </div>
+
+            <div class="actions-container">
+                <button class="action-btn print-btn" onclick="printInvoice()">
+                    🖨️ Imprimir Factura
+                </button>
+                <button class="action-btn email-btn" onclick="showEmailModal()">
+                    📧 Enviar por Email
+                </button>
+                <button class="action-btn nequi-btn" onclick="showNequiPayment()">
+                    💳 Pagar con Nequí
+                </button>
+                <button class="action-btn track-btn" onclick="goToTracking()">
+                    🏍️ Seguir Pedido
+                </button>
+            </div>
+
+            <div class="qr-section" id="qr-section" style="display: none;">
+                <h3>📱 Código QR para Pago Nequí</h3>
+                <div class="qr-code">📱</div>
+                <p>Escanea este código con tu app Nequí para pagar</p>
+            </div>
+
+            <div class="nequi-info" id="nequi-info" style="display: none;">
+                <h3>💳 Información de Pago Nequí</h3>
+                <p>Número Nequí de la Lechonería:</p>
+                <div class="nequi-number">320-555-0199</div>
+                <p>Valor a transferir: <strong id="nequi-amount">$0</strong></p>
+                <p>Concepto: <strong>Pedido <span id="nequi-order"></span></strong></p>
+                <button class="action-btn" style="background: white; color: #ff4757; margin-top: 15px;" onclick="confirmNequiPayment()">
+                    ✅ Confirmar Pago Realizado
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🍽️ ¡Gracias por elegir Lechonería de la Abuela!</p>
+            <p>📞 Para soporte: (601) 234-5678 | 📧 soporte@lechoneriadelaabuela.com</p>
+        </div>
+    </div>
+
+    <!-- Modal para envío por email -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeEmailModal()">&times;</span>
+            <h2>📧 Enviar Factura por Email</h2>
+            <form id="emailForm">
+                <div class="form-group">
+                    <label for="email-address">Correo Electrónico:</label>
+                    <input type="email" id="email-address" required placeholder="ejemplo@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="email-message">Mensaje (opcional):</label>
+                    <input type="text" id="email-message" placeholder="Mensaje adicional...">
+                </div>
+                <button type="submit" class="action-btn email-btn" style="width: 100%; margin-top: 15px;">
+                    📤 Enviar Factura
+                </button>
+            </form>
+        </div>
+    </div>
+  
+  <script src="../public/factura.js"></script>
+  
+</body>
+</html>
+
+
+
+
+

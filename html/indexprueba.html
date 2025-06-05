@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenido | Lechonería de la Abuela</title>
+  <meta name="description" content="Lechonería de la Abuela - Sabores auténticos y tradición familiar desde 1950">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #dc2626;
+      --primary-hover: #b91c1c;
+      --secondary-color: #f59e0b;
+      --accent-color: #059669;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --bg-gradient: linear-gradient(135deg, #fbbf24 0%, #f59e0b 25%, #dc2626 75%, #991b1b 100%);
+      --card-shadow: 0 25px 50px -12px rgba(220, 38, 38, 0.25);
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px);
+      background-size: 80px 80px;
+      animation: float 25s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    body::after {
+      content: '🐷';
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      font-size: 3rem;
+      opacity: 0.1;
+      animation: bounce 3s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-10px) scale(1.1); }
+    }
+
+    .main-container {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(220, 38, 38, 0.1);
+      padding: 3rem 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+      z-index: 2;
+      transform: translateY(0);
+      transition: var(--transition);
+    }
+
+    .main-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 35px 60px -12px rgba(220, 38, 38, 0.4);
+      border-color: rgba(220, 38, 38, 0.2);
+    }
+
+    .logo-container {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .logo {
+      width: 140px;
+      height: 140px;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+      animation: pulse 2.5s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.2) 50%, transparent 70%);
+      animation: shine 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    @keyframes shine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .logo-text {
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    .brand-subtitle {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+      text-shadow: none;
+    }
+
+    .established {
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    h1 {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      transition: left 0.6s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--secondary-color), #f97316);
+      color: white;
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-color);
+      border: 3px solid var(--primary-color);
+      font-weight: 600;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(220, 38, 38, 0.4);
+    }
+
+    .footer-info {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 2px solid rgba(220, 38, 38, 0.1);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin: 2.5rem 0;
+      gap: 1rem;
+    }
+
+    .feature {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      background: rgba(220, 38, 38, 0.05);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.8rem;
+      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+      animation: wiggle 4s ease-in-out infinite;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+
+    .feature-text {
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 640px) {
+      .main-container {
+        padding: 2.5rem 2rem;
+        margin: 1rem;
+      }
+      
+      .button-group {
+        gap: 1rem;
+      }
+      
+      .btn {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+      
+      .features {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+      }
+
+      .logo-text {
+        font-size: 2rem;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .button-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+      
+      .btn {
+        flex: 1;
+        max-width: 220px;
+      }
+    }
+
+    /* Loading animation */
+    .loading {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Special effects */
+    .spice-icon {
+      position: absolute;
+      font-size: 1.5rem;
+      opacity: 0.1;
+      animation: float 15s ease-in-out infinite;
+    }
+
+    .spice-1 { top: 20%; left: 5%; animation-delay: 0s; }
+    .spice-2 { top: 70%; right: 8%; animation-delay: 5s; }
+    .spice-3 { bottom: 30%; left: 10%; animation-delay: 10s; }
+
+    /* Chat Widget Styles */
+    .chat-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .chat-button {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+      transition: var(--transition);
+      font-weight: 600;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .chat-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(220, 38, 38, 0.6);
+    }
+
+    .chat-icon {
+      font-size: 1.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    .chat-text {
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .pulse-notification {
+      animation: pulse-glow 1s ease-in-out 3;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+      }
+      50% { 
+        transform: scale(1.1);
+        box-shadow: 0 15px 40px rgba(220, 38, 38, 0.8);
+      }
+    }
+
+    /* Chat Container */
+    .chat-container {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      display: none;
+      flex-direction: column;
+      z-index: 1001;
+      overflow: hidden;
+      border: 2px solid rgba(220, 38, 38, 0.1);
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Chat Header */
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .chat-header-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      font-size: 2rem;
+      width: 45px;
+      height: 45px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-title h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .chat-title span {
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    .chat-close {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .chat-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+
+    /* Chat Box */
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .chat-box::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-box::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .chat-box::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 10px;
+    }
+
+    /* Chat Messages */
+    .chat-message {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .bot-message {
+      justify-content: flex-start;
+    }
+
+    .user-message {
+      justify-content: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      font-size: 1.5rem;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .message-content {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      word-wrap: break-word;
+    }
+
+    .bot-message .message-content {
+      background: white;
+      color: var(--text-primary);
+      border: 1px solid #e5e7eb;
+      border-top-left-radius: 6px;
+    }
+
+    .user-message .message-content {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      border-top-right-radius: 6px;
+    }
+
+    /* Chat Options */
+    .chat-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chat-option-btn {
+      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .chat-option-btn:hover {
+      transform: translateX(5px);
+      box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
+    }
+
+    /* Typing Indicator */
+    .typing-indicator .message-content {
+      background: white;
+      border: 1px solid #e5e7eb;
+      padding: 15px;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .typing-dots span {
+      width: 8px;
+      height: 8px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      animation: typing 1.4s ease-in-out infinite both;
+    }
+
+    .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typing {
+      0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+      }
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Chat Input */
+    .chat-input-container {
+      padding: 15px 20px;
+      background: white;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #chatInput {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    #chatInput:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    }
+
+    .send-button {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .send-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(220, 38, 38, 0.4);
+    }
+
+    /* Responsive Chat */
+    @media (max-width: 640px) {
+      .chat-container {
+        width: calc(100vw - 40px);
+        height: 80vh;
+        bottom: 90px;
+        right: 20px;
+        left: 20px;
+      }
+
+      .chat-button {
+        padding: 12px 16px;
+      }
+
+      .chat-text {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="spice-icon spice-1">🌶️</div>
+  <div class="spice-icon spice-2">🧄</div>
+  <div class="spice-icon spice-3">🧅</div>
+  
+  <div class="main-container loading">
+    <div class="logo-container">
+      <div class="logo">
+        <span class="logo-text">🐷</span>
+      </div>
+      <div class="brand-subtitle">Lechonería de la Abuela</div>
+      <div class="established">Desde 1950</div>
+    </div>
+
+    <h1>¡Bienvenidos a Casa!</h1>
+    <p class="subtitle">Sabores auténticos y tradición familiar. El mejor lechón de la región, preparado con recetas ancestrales.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🔥</div>
+        <div class="feature-text">Receta Original</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">👵</div>
+        <div class="feature-text">Tradición</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⭐</div>
+        <div class="feature-text">Calidad Premium</div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <a href="/public/html/login.html" class="btn btn-primary">Iniciar Sesión</a>
+      <a href="#pedidos" class="btn btn-secondary">Hacer Pedido</a>
+    </div>
+    
+    <a href="#historia" class="btn btn-outline" style="margin-top: 1.5rem;">Nuestra Historia</a>
+
+    <div class="footer-info">
+      <p>🏆 Más de 70 años deleitando paladares con auténtico sabor casero</p>
+    </div>
+  </div>
+
+  <!-- Chat Widget -->
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-button" onclick="toggleChat()">
+      <span class="chat-icon">💬</span>
+      <span class="chat-text">¡Habla con nosotros!</span>
+    </div>
+  </div>
+
+  <div class="chat-container" id="chatContainer">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">👵</div>
+        <div class="chat-title">
+          <h4>Abuela Carmen</h4>
+          <span>Siempre lista para atenderte</span>
+        </div>
+      </div>
+      <button class="chat-close" onclick="toggleChat()">✕</button>
+    </div>
+    
+    <div class="chat-box" id="chatBox">
+      <div class="chat-message bot-message">
+        <div class="message-avatar">👵</div>
+        <div class="message-content">
+          ¡Hola, querido! Bienvenido a la Lechonería de la Abuela. ¿En qué puedo ayudarte hoy?
+        </div>
+      </div>
+    </div>
+    
+    <div class="chat-input-container">
+      <input type="text" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+      <button onclick="sendMessage()" class="send-button">
+        <span>➤</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Variables globales
+    let chatOpen = false;
+    const chatContainer = document.getElementById('chatContainer');
+    const chatBox = document.getElementById('chatBox');
+    const chatInput = document.getElementById('chatInput');
+  
+    // Animación de entrada
+    window.addEventListener('load', () => {
+      const container = document.querySelector('.main-container');
+      container.classList.add('loading');
+      setTimeout(() => {
+        showChatNotification();
+      }, 3000);
+    });
+  
+    function showChatNotification() {
+      const chatWidget = document.getElementById('chatWidget');
+      chatWidget.classList.add('pulse-notification');
+      setTimeout(() => {
+        chatWidget.classList.remove('pulse-notification');
+      }, 2000);
+    }
+  
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      chatContainer.style.display = chatOpen ? 'flex' : 'none';
+      if (chatOpen) {
+        chatContainer.style.animation = 'slideUp 0.3s ease-out';
+        chatInput.focus();
+      }
+    }
+  
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+  
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (message === '') return;
+      displayMessage(message, 'user');
+      chatInput.value = '';
+      setTimeout(() => {
+        showTypingIndicator();
+        setTimeout(() => {
+          hideTypingIndicator();
+          respondToMessage(message);
+        }, 1500);
+      }, 500);
+    }
+  
+    function displayMessage(message, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${sender}-message`;
+      messageDiv.innerHTML = sender === 'user'
+        ? `<div class="message-content">${message}</div><div class="message-avatar">😊</div>`
+        : `<div class="message-avatar">👵</div><div class="message-content">${message}</div>`;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  
+    function showTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'chat-message bot-message typing-indicator';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `<div class="message-avatar">👵</div><div class="message-content"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+      chatBox.appendChild(typingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  
+    function hideTypingIndicator() {
+      const typing = document.getElementById('typingIndicator');
+      if (typing) typing.remove();
+    }
+  
+    function respondToMessage(message) {
+      let response;
+      const lowerMessage = message.toLowerCase();
+  
+      if (lowerMessage.includes('hola') || lowerMessage.includes('buenos') || lowerMessage.includes('buenas')) {
+        response = `¡Hola, querido! 🤗 Qué gusto verte por aquí. Te doy la bienvenida a nuestra lechonería familiar.`;
+        displayMessage(response, 'bot');
+        setTimeout(() => {
+          const options = `¿Qué te gustaría hacer hoy?<br><br>
+            <div class="chat-options">
+              <button onclick="showMenu()" class="chat-option-btn">🍖 Ver Menú</button>
+              <button onclick="showReservation()" class="chat-option-btn">📅 Hacer Reserva</button>
+              <button onclick="showBeverage()" class="chat-option-btn">🍺 Ver Bebidas</button>
+              <button onclick="showHistory()" class="chat-option-btn">📖 Nuestra Historia</button>
+            </div>`;
+          displayMessage(options, 'bot');
+        }, 1000);
+  
+      } else if (lowerMessage.includes('menu') || lowerMessage.includes('comida') || lowerMessage.includes('platos')) {
+        showMenu();
+      } else if (lowerMessage.includes('reserva') || lowerMessage.includes('mesa')) {
+        showReservation();
+      } else if (lowerMessage.includes('bebida') || lowerMessage.includes('tomar')) {
+        showBeverage();
+      } else if (lowerMessage.includes('historia') || lowerMessage.includes('origen')) {
+        showHistory();
+      } else if (lowerMessage.includes('precio') || lowerMessage.includes('costo') || lowerMessage.includes('cuanto')) {
+        response = `💰 Nuestros precios son muy accesibles, querido. El lechón completo está desde $25, porciones desde $8.`;
+        displayMessage(response, 'bot');
+      } else if (lowerMessage.includes('horario') || lowerMessage.includes('abierto') || lowerMessage.includes('hora')) {
+        response = `🕐 Estamos abiertos todos los días:<br>Lunes a Viernes: 11:00 AM - 9:00 PM<br>Sábados y Domingos: 10:00 AM - 10:00 PM`;
+        displayMessage(response, 'bot');
+      } else if (lowerMessage.includes('opciones') || lowerMessage.includes('acceso') || lowerMessage.includes('entrar')) {
+        const accessOptions = `👇 Aquí tienes algunas opciones rápidas:<br><br>
+          <div class="chat-options">
+            <button class="chat-option-btn" style="background-color: green;" onclick="redirectToPage('https://visitapp.herokuapp.com/')">📅 Reservas</button>
+            <button class="chat-option-btn" style="background-color: green;" onclick="redirectToPage('/public/html/quintomenu.html')">🍖 Ver Menú</button>
+            <button class="chat-option-btn" style="background-color: green;" onclick="redirectToPage('/public/html/bebidasdos.html')">🍹 Ver Bebidas</button>
+          </div>`;
+        displayMessage(accessOptions, 'bot');
+      } else {
+        response = `Disculpa, querido, no entendí bien tu pregunta. 😅`;
+        displayMessage(response, 'bot');
+      }
+    }
+  
+    function showMenu() {
+      const menuResponse = `🍖 <strong>NUESTRO MENÚ ESPECIAL</strong><br>• Lechón entero - $45<br>• Porción individual - $8<br>• Acompañamientos varios<br>• Postres caseros`;
+      displayMessage(menuResponse, 'bot');
+      
+      setTimeout(() => {
+        const menuOptions = `<br><br><button onclick='redirectToPage("quintomenu.html")' class='chat-option-btn' style='background-color: #059669; margin-top: 10px;'>📖 Ver Menú Completo</button>`;
+        displayMessage(menuOptions, 'bot');
+      }, 1000);
+    }
+  
+    function showReservation() {
+      const reservationResponse = `📅 <strong>HACER RESERVA</strong><br>¡Perfecto! Para hacer tu reserva puedes:<br>📞 Llamarnos: (555) 123-4567<br>📱 WhatsApp: (555) 987-6543<br><br>O dime cuántas personas son y para qué fecha, ¡y yo te ayudo a coordinar!`;
+      displayMessage(reservationResponse, 'bot');
+      
+      setTimeout(() => {
+        const reservationButton = `<br><br><button onclick='redirectToPage("http://localhost:3000/")' class='chat-option-btn' style='background-color: #059669; margin-top: 10px;'>📅 Hacer Reserva Directa</button>`;
+        displayMessage(reservationButton, 'bot');
+      }, 1000);
+    }
+  
+    function showBeverage() {
+      const beverageResponse = `🍺 <strong>NUESTRAS BEBIDAS</strong><br>• Cervezas artesanales y comerciales<br>• Refrescos naturales<br>• Jugos frescos<br>• Bebidas calientes`;
+      displayMessage(beverageResponse, 'bot');
+      
+      setTimeout(() => {
+        const beverageButton = `<br><br><button onclick='redirectToPage("bebidasdos.html")' class='chat-option-btn' style='background-color: #059669; margin-top: 10px;'>🍹 Ver Carta de Bebidas</button>`;
+        displayMessage(beverageButton, 'bot');
+      }, 1000);
+    }
+  
+    
+  
+    function orderNow() {
+      const orderResponse = `🛒 Para ordenar, contáctanos por WhatsApp o por llamada.`;
+      displayMessage(orderResponse, 'bot');
+    }
+  
+    // Redirigir a otra página
+    function redirectToPage(url) {
+      window.location.href = url;
+    }
+  
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        btn.style.transform = 'translateY(-3px) scale(1.02)';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  
+    const features = document.querySelectorAll('.feature');
+    features.forEach((feature, index) => {
+      feature.style.animationDelay = `${index * 0.2}s`;
+    });
+  </script>
+  
+</body>
+</html>

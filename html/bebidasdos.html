@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bebidas</title>
+  <link rel="stylesheet" href="../estilos/quintomenu.css">
+</head>
+<body>
+  <header>
+    <img src="../assestment/logo.jfif" alt="Logo de tu empresa">
+    <h1>Bebidas ComicHamburguesas</h1>
+  </header>
+  <main>
+    <div class="product-container">
+      <div class="product" onclick="showProductDetails('COCACOLA')">
+        <img src="../assestment/cocacola.jfif" alt="COCACOLA" data-price="" name="COCACOLA"    >
+        <p>BEBIDAS COCACOLA</p>
+      </div>
+      <div class="product" onclick="showProductDetails('POSTOBON')">
+        <img src="../assestment/postobon.png" alt="POSTOBON">
+        <p>BEBIDAS POSTOBON</p>
+      </div>
+      <div class="product" onclick="showProductDetails('JUGOS')">
+        <img src="../assestment/jugo.jpg" alt="JUGOS">
+        <p>JUGOS NATURALES</p>
+      </div>
+      <div class="product" onclick="showProductDetails('AGUAS')" data-price="25000">
+        <img src="../assestment/agua.jpg" alt="AGUAS">
+        <p>AGUAS</p>
+      </div>
+      
+      </div>
+      <!-- Repite este patrón para los otros productos -->
+    </div>
+    <a href="../infraest/quintomenu.html" class="btn-bebidas">Ver Menú</a>
+    <hr class="separator-line">
+
+    <div id="product-details-container" class="hidden" >
+      <h2 id="product-name"></h2>
+      <img id="product-image" src="" alt="Producto">
+      <label for="size">Puedes disfrutar de los siguientes productos:</label>
+      <select id="size">
+        <option value="cojin 15 platos"  data-price="170000">cojín 15 platos</option>
+        <option value="cojin 25 platos" data-price="280000">cojín 25 platos</option>
+        <option value="cojin 30 platos" data-price="330000">Cojín 30 platos</option>
+        <option value="cojin 45 platos" data-price="370000">cojín 45 platos</option>
+        <option value="cojin 50 platos" data-price="410000">cojín 50 platos</option>
+        <option value="cojin 60 platos" data-price="450000">Cojín 60 platos</option>
+        <option value="cojin 80 platos" data-price="520000">cojín 80 platos</option>
+        <option value="cojin 100 platos" data-price="720000">cojín 100 platos</option>
+      </select>
+      <br>
+      <button onclick="acceptProduct()">Aceptar</button>
+      <br>
+      <br>
+      <button onclick="cancelProduct()">Cancelar</button>
+    </div>
+    <table id="summary-table" class="hidden">
+      <thead>
+        
+        <tr>
+          <th>Producto</th>
+          <th>El pedido debe venir</th>
+          <th>valor</th>
+          <th>Pagar Pedido</th>
+          <th>Cancelar Pedido</th>
+        </tr>
+      </thead>
+
+      <tbody id="summary-table-body">
+        <!-- Aquí se agregarán las filas del resumen -->
+      </tbody>
+    </table>
+  </main>
+
+  <table id="menu-table">
+    <!-- Contenido de la tabla del menú -->
+  </table>
+  <script src="../public/bebidas.js"></script>
+</body>
+</html>

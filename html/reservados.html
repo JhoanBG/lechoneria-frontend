@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos de Reserva</title>
+    <link rel="stylesheet" href="../estilos/reservados.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-button" onclick="goBack()">
+                <span>←</span> Volver
+            </button>
+            <div class="logo-container">
+                <div class="logo-image" href:="../assestment/logo.jfif", style="display: flex; align-items: center; justify-content: center; font-size: 2rem;"></div>
+            </div>
+            <h1>Reserva tu Mesa</h1>
+            <div id="selected-table-info" class="selected-table">
+                <span id="table-name-display"></span>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <form id="reservation-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name" class="required-field">Nombre</label>
+                        <input type="text" id="name" name="name" required placeholder="Tu nombre" maxlength="50">
+                        <div class="error-message-field" id="name-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname" class="required-field">Apellidos</label>
+                        <input type="text" id="lastname" name="lastname" required placeholder="Tus apellidos" maxlength="50">
+                        <div class="error-message-field" id="lastname-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="required-field tooltip">
+                            Cédula
+                            <span class="tooltiptext">Ingresa tu número de cédula (6-12 dígitos)</span>
+                        </label>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Número de cédula" pattern="[0-9]{6,12}">
+                        <div class="error-message-field" id="cedula-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="required-field">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Número de contacto" pattern="[0-9]{7,15}">
+                        <div class="error-message-field" id="phone-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reservation-date" class="required-field">Fecha de Reserva</label>
+                        <input type="date" id="reservation-date" name="reservation-date" required>
+                        <div class="error-message-field" id="date-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reservation-time" class="required-field">Hora de Reserva</label>
+                        <input type="time" id="reservation-time" name="reservation-time" required>
+                        <div class="error-message-field" id="time-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Número de Comensales</label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Selecciona...</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5">5 personas</option>
+                            <option value="6">6 personas</option>
+                            <option value="7">7 personas</option>
+                            <option value="8">8 personas</option>
+                            <option value="9">9 personas</option>
+                            <option value="10">10+ personas</option>
+                        </select>
+                        <div class="error-message-field" id="guests-error"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email (Recomendado)</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com">
+                        <div class="error-message-field" id="email-error"></div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="reason">Motivo de la Reserva</label>
+                        <textarea id="reason" name="reason" placeholder="Cumpleaños, aniversario, reunión familiar..." maxlength="200"></textarea>
+                        <div class="field-counter" id="reason-counter">0/200</div>
+                    </div>
+                </div>
+
+                <div class="decorations-section">
+                    <div class="decorations-title">
+                        🎉 ¿Necesitas decoración especial?
+                    </div>
+                    <div class="decorations-grid">
+                        <label class="checkbox-card" for="decorations-balloons">
+                            <input type="checkbox" id="decorations-balloons" name="decorations" value="Globos">
+                            <span class="checkbox-icon">🎈</span>
+                            <span class="checkbox-label">Globos</span>
+                        </label>
+                        <label class="checkbox-card" for="decorations-cake">
+                            <input type="checkbox" id="decorations-cake" name="decorations" value="Torta">
+                            <span class="checkbox-icon">🎂</span>
+                            <span class="checkbox-label">Torta</span>
+                        </label>
+                        <label class="checkbox-card" for="decorations-flowers">
+                            <input type="checkbox" id="decorations-flowers" name="decorations" value="Flores">
+                            <span class="checkbox-icon">🌸</span>
+                            <span class="checkbox-label">Flores</span>
+                        </label>
+                        <label class="checkbox-card" for="decorations-music">
+                            <input type="checkbox" id="decorations-music" name="decorations" value="Música">
+                            <span class="checkbox-icon">🎵</span>
+                            <span class="checkbox-label">Música</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        <span class="btn-text">Confirmar Reserva</span>
+                        <div class="loading">
+                            <div class="spinner"></div>
+                        </div>
+                    </button>
+                </div>
+
+                <input type="hidden" id="table-name" name="table-name" value="">
+            </form>
+
+            <div id="success-message" class="success-message">
+                <h3>¡Reserva Exitosa! 🎉</h3>
+                <p>Tu mesa ha sido reservada correctamente. Te esperamos pronto.</p>
+                <p><strong>Detalles de tu reserva:</strong></p>
+                <div id="reservation-details"></div>
+            </div>
+
+            <div id="error-message" class="error-message">
+                <p>Hubo un error al procesar tu reserva. Por favor, inténtalo nuevamente.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="../lenguaje/reservados.js"></script>
+</body>
+</html>
+

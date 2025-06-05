@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoreo de Mesas Reservadas</title>
+    <link rel="stylesheet" href="../estilos/monitoreo.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo-image" style="background: linear-gradient(45deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">L</div>
+                <div class="logo-text">Lechonería de la Abuela</div>
+            </div>
+            <div class="header-controls">
+                <select class="status-filter" id="filter-status">
+                    <option value="all">Todas las mesas</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="entregado">Entregadas</option>
+                </select>
+                <button class="refresh-btn" onclick="cargarMesas()">🔄 Actualizar</button>
+                <a href="#" class="close-btn">✕ Cerrar</a>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number" id="total-mesas">0</span>
+                <span class="stat-label">Total Reservas</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="mesas-pendientes">0</span>
+                <span class="stat-label">Pendientes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="mesas-entregadas">0</span>
+                <span class="stat-label">Entregadas</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="ultimo-update">--:--</span>
+                <span class="stat-label">Última Actualización</span>
+            </div>
+        </div>
+
+        <h1>Monitoreo de Mesas</h1>
+
+        <div id="loading" class="loading" style="display: none;">
+            🔄 Cargando reservas...
+        </div>
+
+        <div id="mesas-container" class="mesas-grid">
+            <!-- Las mesas se cargarán aquí dinámicamente -->
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <h3>📋 No hay reservas</h3>
+            <p>No se encontraron mesas reservadas en este momento.</p>
+        </div>
+    </div>
+
+    <script src="../lenguaje/monitoreo.js"></script>
+</body>
+</html>
+

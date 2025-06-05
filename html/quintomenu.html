@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lechona de la Abuela</title>
+  <link rel="stylesheet" href="../estilos/quintomenu.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <header>
+          <h1>🍽️ Lechona de la Abuela</h1>
+          <p class="subtitle">Auténtica Comida Tradicional Colombiana</p>
+      </header>
+
+      <main>
+          <!-- Sección de Platos Principales -->
+          <div class="section-title">
+              <h2>🍖 Platos Principales</h2>
+          </div>
+          
+          <div class="products-grid" id="main-dishes-grid">
+              <div class="product-card" onclick="showProductDetails('LECHONA')">
+                  <img src="../assestment/Lechona.jfif" alt="Lechona">
+                  <div class="product-title">LECHONA</div>
+                  <div class="product-description">
+                      Plato tradicional colombiano que contiene cerdo entero asado relleno de cebolla, guisantes, patatas, hierbas frescas y diversas especias acompañado de arepa y chicharrón
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('CHORIZOS')">
+                  <img src="../assestment/Chorizos.jfif" alt="Chorizos">
+                  <div class="product-title">CHORIZOS</div>
+                  <div class="product-description">
+                      Delicioso chorizo acompañado de arepa
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('CODITOS')">
+                  <img src="../assestment/Coditos.jfif" alt="Coditos">
+                  <div class="product-title">CODITOS</div>
+                  <div class="product-description">
+                      500gr de Huesos codillos acompañado de papas saladas o criollas
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('COSTILLAS')">
+                  <img src="../assestment/Costilla.jfif" alt="Costillas">
+                  <div class="product-title">COSTILLAS</div>
+                  <div class="product-description">
+                      500gr de Costilla de Cerdo acompañada con papas saladas o criollas
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('PANCETA')">
+                  <img src="../assestment/Panzeta.jfif" alt="Panceta">
+                  <div class="product-title">PANCETA</div>
+                  <div class="product-description">
+                      500gr de deliciosa panceta acompañada con papas saladas o criollas
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('TAMALES')">
+                  <img src="../assestment/Tamales.jfif" alt="Tamales">
+                  <div class="product-title">TAMALES</div>
+                  <div class="product-description">
+                      Deliciosos Tamales tolimenses acompañado con arepa
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+          </div>
+
+          <!-- Sección de Bebidas -->
+          <div class="section-title">
+              <h2>🥤 Bebidas</h2>
+          </div>
+          
+          <div class="products-grid" id="beverages-grid">
+              <div class="product-card" onclick="showProductDetails('GASEOSAS')">
+                  <img src="../assestment/gaseosa.jpg" alt="Gaseosas">
+                  <div class="product-title">GASEOSAS</div>
+                  <div class="product-description">
+                      Variedad de gaseosas frías para acompañar tu comida
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('JUGOS_NATURALES')">
+                  <img src="../assestment/jugo.jpg" alt="Jugos Naturales">
+                  <div class="product-title">JUGOS NATURALES</div>
+                  <div class="product-description">
+                      Deliciosos jugos naturales de frutas frescas
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('CERVEZAS')">
+                  <img src="../assestment/cerveza.jpg" alt="Cervezas">
+                  <div class="product-title">CERVEZAS</div>
+                  <div class="product-description">
+                      Cervezas nacionales e importadas bien frías
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+
+              <div class="product-card" onclick="showProductDetails('AGUA')">
+                  <img src="../assestment/agua.jpg" alt="Agua">
+                  <div class="product-title">AGUA</div>
+                  <div class="product-description">
+                      Agua pura y refrescante
+                  </div>
+                  <button class="btn-primary">Ver Detalles</button>
+              </div>
+          </div>
+
+          <!-- Carrito de Compras -->
+          <div class="cart-container" id="cart-container">
+              <div class="cart-header">
+                  <h2 class="cart-title">🛒 Carrito de Compras</h2>
+                  <span class="cart-count" id="cart-count">0</span>
+              </div>
+              
+              <div id="cart-items">
+                  <div class="empty-cart">
+                      <div class="empty-cart-icon">🛒</div>
+                      <p>Tu carrito está vacío</p>
+                      <p>¡Agrega algunos productos deliciosos!</p>
+                  </div>
+              </div>
+
+              <div class="cart-total hidden" id="cart-total">
+                  <div class="total-amount">
+                      Total: $<span id="total-amount">0</span>
+                  </div>
+                  <button class="btn-success" onclick="proceedToCheckout()">
+                      Proceder al Pago
+                  </button>
+                  <button class="btn-secondary" onclick="clearCart()">
+                      Vaciar Carrito
+                  </button>
+              </div>
+          </div>
+      </main>
+  </div>
+
+  <!-- Modal de Detalles del Producto -->
+  <div id="product-modal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <div style="text-align: center;">
+              <img id="modal-image" src="" alt="">
+              <h2 id="modal-title"></h2>
+              <p id="modal-description"></p>
+              
+              <label for="size-select"><strong>Selecciona una opción:</strong></label>
+              <select id="size-select" class="size-select">
+                  <!-- Las opciones se llenarán dinámicamente -->
+              </select>
+              
+              <div style="margin-top: 20px;">
+                  <button class="btn-success" onclick="addToCart()">
+                      Agregar al Carrito
+                  </button>
+                  <button class="btn-secondary" onclick="closeModal()">
+                      Cancelar
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal de Checkout/Factura -->
+  <div id="checkout-modal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeCheckoutModal()">&times;</span>
+          <div class="invoice">
+              <div class="invoice-header">
+                  <h2>🧾 Factura de Compra</h2>
+                  <h3>Lechona de la Abuela</h3>
+                  <p>Auténtica Comida Tradicional Colombiana</p>
+                  <p><strong>Fecha:</strong> <span id="invoice-date"></span></p>
+                  <p><strong>Pedido #:</strong> <span id="order-number"></span></p>
+              </div>
+
+              <!-- Información del Cliente -->
+              <div class="delivery-section">
+                  <h4>👤 Información del Cliente</h4>
+                  <div class="form-row">
+                      <input type="text" id="customer-name" class="form-input" placeholder="Nombre completo *" required>
+                      <input type="tel" id="customer-phone" class="form-input" placeholder="Teléfono *" required>
+                  </div>
+              </div>
+
+              <!-- Opciones de Entrega -->
+              <div class="delivery-section">
+                  <h4>📦 Tipo de Entrega</h4>
+                  <div class="delivery-option">
+                      <input type="radio" id="pickup" name="delivery" value="pickup" checked onchange="updateDeliveryFee()">
+                      <label for="pickup">🏪 Recoger en el local (Gratis)</label>
+                  </div>
+                  <div class="delivery-option">
+                      <input type="radio" id="delivery-local" name="delivery" value="local" onchange="updateDeliveryFee()">
+                      <label for="delivery-local">🚴‍♂️ Domicilio Local (+$3,000)</label>
+                  </div>
+                  <div class="delivery-option">
+                      <input type="radio" id="delivery-zone1" name="delivery" value="zone1" onchange="updateDeliveryFee()">
+                      <label for="delivery-zone1">🚗 Zona 1 - Hasta 5km (+$5,000)</label>
+                  </div>
+                  <div class="delivery-option">
+                      <input type="radio" id="delivery-zone2" name="delivery" value="zone2" onchange="updateDeliveryFee()">
+                      <label for="delivery-zone2">🚛 Zona 2 - Hasta 10km (+$8,000)</label>
+                  </div>
+                  <div class="delivery-option">
+                      <input type="radio" id="delivery-zone3" name="delivery" value="zone3" onchange="updateDeliveryFee()">
+                      <label for="delivery-zone3">🚚 Zona 3 - Más de 10km (+$12,000)</label>
+                  </div>
+                  
+                  <input type="text" id="delivery-address" class="form-input" placeholder="Dirección de entrega (si aplica)" style="margin-top: 10px;">
+              </div>
+
+              <!-- Detalles del Pedido -->
+              <div class="invoice-details">
+                  <h4>🛍️ Detalles del Pedido</h4>
+                  <div id="invoice-items"></div>
+              </div>
+
+              <!-- Total -->
+              <div class="invoice-total">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                      <span>Subtotal:</span>
+                      <span>$<span id="invoice-subtotal">0</span></span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                      <span>Domicilio:</span>
+                      <span>$<span id="invoice-delivery-fee">0</span></span>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; font-size: 1.2em;">
+                      <span>TOTAL A PAGAR:</span>
+                      <span>$<span id="invoice-total">0</span></span>
+                  </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 20px;">
+                  <button class="btn-success" onclick="confirmOrder()" style="font-size: 1.1em; padding: 15px 30px;">
+                      ✅ Confirmar Pedido
+                  </button>
+                  <button class="btn-secondary" onclick="closeCheckoutModal()">
+                      Cancelar
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <script src="../lenguaje/quintomenu.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear Cuenta | VisitApp - Maisdaju</title>
+  <link rel="stylesheet" href="../estilos/registro.css" />
+  <meta name="description" content="Crea tu cuenta en VisitApp para comenzar a apoyar el desarrollo infantil">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    
+  </style>
+</head>
+<body>
+    <div class="register-container fade-in">
+        <a href="../html/index.html" class="back-link">Volver al inicio</a>
+        
+        <div class="header">
+          <div class="logo">
+            <span class="logo-text">🥘</span>
+          </div>
+          <div class="brand-subtitle">Tradición y Sabor</div>
+          <h2>Únete a la Familia</h2>
+          <p class="subtitle">Regístrate y disfruta de la auténtica lechona casera de la abuela</p>
+        </div>
+    
+        <form id="registerForm" novalidate>
+          <div class="form-group">
+            <label for="nombre">Nombre Completo</label>
+            <div class="input-wrapper">
+              <input type="text" id="nombre" name="nombre" required minlength="2" maxlength="50" placeholder="Tu nombre completo">
+              <span class="input-icon">👤</span>
+            </div>
+            <div class="error-message" id="nombre-error">
+              <span>⚠️</span>
+              <span class="error-text"></span>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <div class="input-wrapper">
+              <input type="email" id="email" name="email" required placeholder="tu@email.com">
+              <span class="input-icon">📧</span>
+            </div>
+            <div class="error-message" id="email-error">
+              <span>⚠️</span>
+              <span class="error-text"></span>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="telefono">Teléfono (Opcional)</label>
+            <div class="input-wrapper">
+              <input type="tel" id="telefono" name="telefono" placeholder="300 123 4567">
+              <span class="input-icon">📱</span>
+            </div>
+            <div class="error-message" id="telefono-error">
+              <span>⚠️</span>
+              <span class="error-text"></span>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <input type="password" id="password" name="password" required minlength="8" placeholder="Mínimo 8 caracteres">
+              <span class="input-icon">🔒</span>
+              <button type="button" class="password-toggle" data-target="password">👁️</button>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <div class="strength-text" id="strength-text">Ingresa una contraseña segura</div>
+            </div>
+            <div class="error-message" id="password-error">
+              <span>⚠️</span>
+              <span class="error-text"></span>
+            </div>
+          </div>
+    
+          <div class="form-group">
+            <label for="confirmar">Confirmar Contraseña</label>
+            <div class="input-wrapper">
+              <input type="password" id="confirmar" name="confirmar" required placeholder="Repite tu contraseña">
+              <span class="input-icon">🔒</span>
+              <button type="button" class="password-toggle" data-target="confirmar">👁️</button>
+            </div>
+            <div class="error-message" id="confirmar-error">
+              <span>⚠️</span>
+              <span class="error-text"></span>
+            </div>
+          </div>
+    
+          <button type="submit" class="submit-btn">
+            <span class="loading-spinner"></span>
+            <span class="btn-text">Crear Mi Cuenta</span>
+          </button>
+        </form>
+    
+        <div class="footer-links">
+          <p>¿Ya tienes cuenta? <a href="../html/login.html">Inicia sesión aquí</a></p>
+        </div>
+      </div>
+    
+      <!-- Toast notification -->
+      <div class="toast" id="toast">
+        <span class="toast-icon">🎉</span>
+        <div class="toast-content">
+          <div class="toast-title">¡Bienvenido a la familia!</div>
+          <div class="toast-message">Tu cuenta ha sido creada exitosamente</div>
+        </div>
+      </div>
+
+  <script>
+   
+  </script>
+  <script src="../lenguaje/registro.js"></script>
+
+</body>
+</html>
